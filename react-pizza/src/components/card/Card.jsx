@@ -1,11 +1,21 @@
 import React from 'react';
+import { AppContext } from '../../App';
 
-function Card({ imageUrl, title, price, sizes, types }) {
+function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const pizzaTypes = ['Тонкое', 'Толстое'];
 
+  const { addToCart, countEachProduct } = React.useContext(AppContext);
   const [selectedType, setSelectedType] = React.useState(0);
   const [selectedSize, setSelectedSize] = React.useState(0);
-  const [countPurchase, setCountPurchase] = React.useState(0);
+  const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
+
+  countEachProduct(id);
+  const clickOnPlus = (object) => {
+    addToCart(object);
+    setCountPurchase((prev) => prev + 1);
+  };
+
+  const object = { id, rating, category, imageUrl, title, price, sizes, types };
 
   return (
     <div className="card">
@@ -45,7 +55,7 @@ function Card({ imageUrl, title, price, sizes, types }) {
         <span className="price">от {price} ₽</span>
         <div
           onClick={() => {
-            setCountPurchase((prev) => prev + 1);
+            clickOnPlus(object);
           }}
           className="add-button">
           <img src="img/button-plus.svg" alt="plus" height={12} width={12} />
