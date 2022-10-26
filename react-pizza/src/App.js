@@ -23,8 +23,6 @@ function App() {
     }
   }, []);
 
-  console.log('+');
-
   return (
     <div className="App">
       <div className="wrapper">
