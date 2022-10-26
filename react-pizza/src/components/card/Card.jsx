@@ -49,7 +49,7 @@ function Card({ imageUrl, title, price, sizes, types }) {
           }}
           className="add-button">
           <img src="img/button-plus.svg" alt="plus" height={12} width={12} />
-          <div>Добавить</div>
+          <button>Добавить</button>
           <span>{countPurchase}</span>
         </div>
       </div>

@@ -10,7 +10,7 @@ export function Home(props) {
   const { cards, isLoading } = React.useContext(AppContext);
 
   return (
-    <>
+    <div className="container">
       <div className="upper-part">
         <Categories />
         <Sort />
@@ -25,6 +25,6 @@ export function Home(props) {
               return <Card key={object.id} {...object} />;
             })}
       </div>
-    </>
+    </div>
   );
 }

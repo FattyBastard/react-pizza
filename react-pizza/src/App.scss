@@ -1,4 +1,14 @@
 // .App
+
+@mixin unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -227,6 +237,18 @@
     border: 1px solid #eb5a1e;
     border-radius: 50%;
     background-color: #eb5a1e;
+    @include unselectable;
+  }
+  button {
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #eb5a1e;
   }
 }
 

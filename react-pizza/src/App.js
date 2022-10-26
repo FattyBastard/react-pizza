@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
+import { Routes, Route } from 'react-router-dom';
 
 import './App.scss';
 
@@ -21,16 +22,16 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{ cards, isLoading }}>
-      <div className="App">
-        <div className="wrapper">
+    <div className="App">
+      <div className="wrapper">
+        <AppContext.Provider value={{ cards, isLoading }}>
           <Header />
-          <div className="container">
-            <Home />
-          </div>
-        </div>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+          </Routes>
+        </AppContext.Provider>
       </div>
-    </AppContext.Provider>
+    </div>
   );
 }
 
