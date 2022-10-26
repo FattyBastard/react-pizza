@@ -25,6 +25,7 @@
   border-bottom: 1px solid #f7f7f7;
 }
 .logo-part {
+  cursor: pointer;
   display: flex;
   align-items: center;
 }
@@ -52,6 +53,7 @@
   }
 }
 .header-button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   background: #fe5f1e;
@@ -130,15 +132,19 @@
 }
 .all-pizza-container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .card {
-  margin-right: 15px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  &:not(:nth-of-type(4n)) {
+    margin-right: 25px;
+  }
   h2 {
     margin-top: 11px;
     margin-bottom: 22px;

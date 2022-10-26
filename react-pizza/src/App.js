@@ -1,46 +1,36 @@
 import React from 'react';
-import axios from 'axios';
+
+import { Header } from './components/header/Header';
+import { Home } from './components/home/Home';
 
 import './App.scss';
-import Card from './components/card/Card';
-import { Header } from './components/header/Header';
-import { Categories } from './components/categories/Categories';
-import { Sort } from './components/sort/Sort';
+
+export const AppContext = React.createContext({});
 
 function App() {
   const [cards, setCards] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const getResource = async (url) => {
-      return await axios.get(url);
-    };
-    try {
-      getResource('http://localhost:8000/pizza').then((res) => {
-        setCards(res.data);
+    fetch('http://localhost:8000/pizza')
+      .then((res) => res.json())
+      .then((arr) => {
+        setCards(arr);
+        setIsLoading(false);
       });
-    } catch (error) {
-      alert('Не получилось загрузить данные :(');
-    }
   }, []);
 
   return (
-    <div className="App">
-      <div className="wrapper">
-        <Header />
-        <div className="container">
-          <div className="upper-part">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="all-pizza-header">Все пиццы</h2>
-          <div className="all-pizza-container">
-            {cards.map((object) => {
-              return <Card key={object.id} {...object} />;
-            })}
+    <AppContext.Provider value={{ cards, isLoading }}>
+      <div className="App">
+        <div className="wrapper">
+          <Header />
+          <div className="container">
+            <Home />
           </div>
         </div>
       </div>
-    </div>
+    </AppContext.Provider>
   );
 }
 
