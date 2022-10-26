@@ -81,6 +81,7 @@
 }
 .categories-item {
   padding: 14px 30px 17px 30px;
+  cursor: pointer;
   background: #f9f9f9;
   border-radius: 30px;
   line-height: 19px;
@@ -96,6 +97,7 @@
 }
 
 .sort {
+  cursor: pointer;
   display: flex;
   align-items: center;
   span {
@@ -172,6 +174,7 @@
 }
 .type-list-item {
   flex: 1;
+  cursor: pointer;
   text-align: center;
   padding: 8px;
 }
@@ -180,6 +183,7 @@
 }
 .size-list-item {
   flex: 1;
+  cursor: pointer;
   text-align: center;
   padding: 8px;
 }
@@ -196,6 +200,7 @@
 }
 .add-button {
   color: #eb5a1e;
+  cursor: pointer;
   display: flex;
   background: #ffffff;
   border: 1px solid #eb5a1e;
