@@ -1,9 +1,10 @@
 import React from 'react';
+import { AppContext } from '../../App';
 
 export function Categories() {
   const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
 
-  const [activeCategory, setActiveCategory] = React.useState(0);
+  const { onClickCategory, activeCategory } = React.useContext(AppContext);
 
   return (
     <ul className="categories">
@@ -11,7 +12,7 @@ export function Categories() {
         return (
           <li
             onClick={() => {
-              setActiveCategory(index);
+              onClickCategory(index);
             }}
             key={index}
             className={activeCategory === index ? `categories-item active` : `categories-item`}>

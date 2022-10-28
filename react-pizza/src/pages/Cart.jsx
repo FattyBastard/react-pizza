@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cartitem } from '../components/cart-item/CartItem';
+import { CartItem } from '../components/cart-item/CartItem';
 import { AppContext } from '../App';
 
 export function Cart(props) {
@@ -18,9 +18,9 @@ export function Cart(props) {
           </div>
         </div>
         <ul className="cart-list">
-          <Cartitem />
-          <Cartitem />
-          <Cartitem />
+          {selectedCards.map((object) => {
+            return <CartItem key={object.id} {...object} />;
+          })}
         </ul>
       </div>
     </>

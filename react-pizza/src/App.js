@@ -10,6 +10,19 @@ import './App.scss';
 export const AppContext = React.createContext({});
 
 function App() {
+  // categories
+  const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
+  const [activeCategory, setActiveCategory] = React.useState(0);
+  console.log(activeCategory);
+  {
+  }
+
+  const onClickCategory = (id) => {
+    setActiveCategory(id);
+  };
+  // sort
+  // const [sortCategory, setSortCategory] = React.useState(category[0]);
+
   const [cards, setCards] = React.useState([]);
   const [selectedCards, setSelectedCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -29,13 +42,18 @@ function App() {
   };
 
   React.useEffect(() => {
-    fetch('http://localhost:8000/pizza')
+    setIsLoading(true);
+    fetch(
+      `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza${
+        activeCategory > 0 ? `?category=${activeCategory}` : ``
+      }`,
+    )
       .then((res) => res.json())
       .then((arr) => {
         setCards(arr);
         setIsLoading(false);
       });
-  }, []);
+  }, [activeCategory]);
 
   return (
     <div className="App">
@@ -51,6 +69,8 @@ function App() {
             addToCart,
             totalPrice,
             countEachProduct,
+            onClickCategory,
+            activeCategory,
           }}>
           <Header />
           <Routes>

@@ -9,7 +9,6 @@ function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
 
-  countEachProduct(id);
   const clickOnPlus = (object) => {
     addToCart(object);
     setCountPurchase((prev) => prev + 1);
