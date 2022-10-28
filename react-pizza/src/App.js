@@ -11,17 +11,26 @@ export const AppContext = React.createContext({});
 
 function App() {
   // categories
-  const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
   const [activeCategory, setActiveCategory] = React.useState(0);
-  console.log(activeCategory);
-  {
-  }
 
   const onClickCategory = (id) => {
     setActiveCategory(id);
   };
   // sort
-  // const [sortCategory, setSortCategory] = React.useState(category[0]);
+  const [sortCategory, setSortCategory] = React.useState(0);
+
+  const onClickSort = (id) => {
+    setSortCategory(id);
+  };
+
+  const sortType = [
+    { name: 'популярности ASC', sortProperty: 'rating' },
+    { name: 'алфавиту ASC', sortProperty: 'title' },
+    { name: 'цене ASC', sortProperty: 'price' },
+    { name: 'популярности DESC', sortProperty: '-rating' },
+    { name: 'алфавиту DESC', sortProperty: '-title' },
+    { name: 'цене DESC', sortProperty: '-price' },
+  ];
 
   const [cards, setCards] = React.useState([]);
   const [selectedCards, setSelectedCards] = React.useState([]);
@@ -44,8 +53,10 @@ function App() {
   React.useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza${
-        activeCategory > 0 ? `?category=${activeCategory}` : ``
+      `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
+        activeCategory > 0 ? `category=${activeCategory}` : ``
+      }&sortBy=${sortType[sortCategory].sortProperty.replace('-', '')}&order=${
+        sortType[sortCategory].sortProperty.includes('-') ? `desc` : `asc`
       }`,
     )
       .then((res) => res.json())
@@ -53,7 +64,7 @@ function App() {
         setCards(arr);
         setIsLoading(false);
       });
-  }, [activeCategory]);
+  }, [activeCategory, sortCategory]);
 
   return (
     <div className="App">
@@ -71,6 +82,8 @@ function App() {
             countEachProduct,
             onClickCategory,
             activeCategory,
+            onClickSort,
+            sortCategory,
           }}>
           <Header />
           <Routes>
