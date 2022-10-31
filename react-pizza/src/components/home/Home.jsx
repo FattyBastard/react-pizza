@@ -7,7 +7,7 @@ import MyLoader from '../loader/Loader';
 import Card from '../card/Card';
 
 export function Home(props) {
-  const { cards, isLoading } = React.useContext(AppContext);
+  const { cards, isLoading, inputValue } = React.useContext(AppContext);
 
   return (
     <div className="container">
@@ -21,9 +21,11 @@ export function Home(props) {
           ? [...Array(10)].map((_, index) => {
               return <MyLoader key={index} />;
             })
-          : cards.map((object) => {
-              return <Card key={object.id} {...object} />;
-            })}
+          : cards
+              .filter((card) => card.title.toLowerCase().includes(inputValue.toLowerCase()))
+              .map((object) => {
+                return <Card key={object.id} {...object} />;
+              })}
       </div>
     </div>
   );

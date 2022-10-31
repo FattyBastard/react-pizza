@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
 
 export function Header() {
-  const { selectedCards, totalPrice } = React.useContext(AppContext);
+  const { selectedCards, totalPrice, inputOnChange, inputValue, setInputValue } =
+    React.useContext(AppContext);
 
   return (
     <header className="header">
@@ -17,6 +18,26 @@ export function Header() {
           </div>
         </div>
       </Link>
+      <div className="search-field">
+        <img src="img/search.svg" alt="search" height={12} width={12} className="search" />
+        <input
+          onChange={(event) => inputOnChange(event)}
+          value={inputValue}
+          className="search-input"
+          type="text"
+          placeholder="Поиск..."
+        />
+        <img
+          onClick={() => {
+            setInputValue('');
+          }}
+          src="img/close-search.svg"
+          alt="close"
+          height={7}
+          width={7}
+          className="search-close"
+        />
+      </div>
       <Link to="/cart">
         <div className="header-button">
           <span>{totalPrice} ₽</span>

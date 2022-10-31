@@ -383,3 +383,28 @@
     color: #000000;
   }
 }
+.search {
+  opacity: 0.5;
+  margin-right: 15px;
+}
+.search-close {
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.search-field {
+  padding: 5px 12px;
+  border: 1px solid rgb(147, 147, 147);
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+.search-input {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

@@ -35,6 +35,11 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCards, setSelectedCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [inputValue, setInputValue] = React.useState('');
+
+  const inputOnChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
   const totalPrice = selectedCards.reduce((accumulator, currentValue) => {
     return (accumulator += parseInt(currentValue.price));
@@ -64,7 +69,7 @@ function App() {
         setCards(arr);
         setIsLoading(false);
       });
-  }, [activeCategory, sortCategory]);
+  }, [activeCategory, sortCategory, inputValue]);
 
   return (
     <div className="App">
@@ -84,6 +89,9 @@ function App() {
             activeCategory,
             onClickSort,
             sortCategory,
+            inputValue,
+            inputOnChange,
+            setInputValue,
           }}>
           <Header />
           <Routes>
