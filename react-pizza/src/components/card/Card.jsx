@@ -17,6 +17,7 @@ function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const object = { id, rating, category, imageUrl, title, price, sizes, types };
 
   return (
+    // <div className="card-warpper">
     <div className="card">
       <img src={imageUrl} alt="img" height={260} width={260} />
       <h2>{title}</h2>
