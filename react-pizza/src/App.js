@@ -5,26 +5,16 @@ import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
 import { Cart } from './pages/Cart';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchData } from './redux/slices/sortSlice';
+import { useSelector } from 'react-redux';
 
 import './App.scss';
 
 export const AppContext = React.createContext({});
 
 function App() {
-  // categories
-  const [activeCategory, setActiveCategory] = React.useState(0);
-
-  const onClickCategory = (id) => {
-    setActiveCategory(id);
-  };
-  // sort
-  const [sortCategory, setSortCategory] = React.useState(0);
-
-  const onClickSort = (id) => {
-    setSortCategory(id);
-  };
+  const { activeCategory, sort } = useSelector((state) => {
+    return state.filter;
+  });
 
   const sortType = [
     { name: 'популярности ASC', sortProperty: 'rating' },
@@ -63,8 +53,8 @@ function App() {
     fetch(
       `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
         activeCategory > 0 ? `category=${activeCategory}` : ``
-      }&sortBy=${sortType[sortCategory].sortProperty.replace('-', '')}&order=${
-        sortType[sortCategory].sortProperty.includes('-') ? `desc` : `asc`
+      }&sortBy=${sortType[sort].sortProperty.replace('-', '')}&order=${
+        sortType[sort].sortProperty.includes('-') ? `desc` : `asc`
       }`,
     )
       .then((res) => res.json())
@@ -72,7 +62,7 @@ function App() {
         setCards(arr);
         setIsLoading(false);
       });
-  }, [activeCategory, sortCategory, inputValue]);
+  }, [activeCategory, sort, inputValue]);
 
   return (
     <div className="App">
@@ -88,10 +78,7 @@ function App() {
             addToCart,
             totalPrice,
             countEachProduct,
-            onClickCategory,
-            activeCategory,
-            onClickSort,
-            sortCategory,
+
             inputValue,
             inputOnChange,
             setInputValue,

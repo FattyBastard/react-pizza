@@ -1,39 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  cards: [],
+  activeCategory: 0,
+  sort: 0,
 };
 
-export const sortSlice = createSlice({
-  name: 'sort',
+export const filterSlice = createSlice({
+  name: 'filter',
   initialState,
   reducers: {
-    fetchData: (state) => {
-      fetch(
-        `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
-          state.activeCategory > 0 ? `category=${state.activeCategory}` : ``
-        }&sortBy=${state.sortType[state.sortCategory].sortProperty.replace('-', '')}&order=${
-          state.sortType[state.sortCategory].sortProperty.includes('-') ? `desc` : `asc`
-        }`,
-      )
-        .then((res) => res.json())
-        .then((arr) => {
-          state.cards = arr;
-        });
+    setActiveCategory(state, action) {
+      state.activeCategory = action.payload;
+    },
+    setSortCategory(state, action) {
+      state.sort = action.payload;
     },
   },
-  //   increment: (state) => {
-  //     state.value += 1;
-  //   },
-  //   decrement: (state) => {
-  //     state.value -= 1;
-  //   },
-  //   incrementByAmount: (state, action) => {
-  //     state.value += action.payload;
-  //   },
-  // },
 });
 
-export const { fetchData } = sortSlice.actions;
+export const { setActiveCategory, setSortCategory } = filterSlice.actions;
 
-export default sortSlice.reducer;
+export default filterSlice.reducer;

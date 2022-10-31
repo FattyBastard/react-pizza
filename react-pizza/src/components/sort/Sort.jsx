@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppContext } from '../../App';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortCategory } from '../../redux/slices/sortSlice';
 
 export function Sort() {
   const sortType = [
@@ -12,7 +13,14 @@ export function Sort() {
   ];
 
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const { sortCategory, onClickSort } = React.useContext(AppContext);
+  const dispatch = useDispatch();
+  const { sort } = useSelector((state) => {
+    return state.filter;
+  });
+
+  const onClickSort = (id) => {
+    dispatch(setSortCategory(id));
+  };
 
   return (
     <>
@@ -23,7 +31,7 @@ export function Sort() {
         className="sort">
         <img src="img/triangle.svg" alt="triangle" height={6} width={10} />
         <span>Сортировка по: </span>
-        <div className="sorted-category">{sortType[sortCategory].name}</div>
+        <div className="sorted-category">{sortType[sort].name}</div>
         <ul className={visiblePopup ? `popup active` : `popup`}>
           {sortType.map((item, index) => {
             return (
