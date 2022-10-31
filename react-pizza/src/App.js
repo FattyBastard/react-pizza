@@ -5,6 +5,9 @@ import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
 import { Cart } from './pages/Cart';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchData } from './redux/slices/sortSlice';
+
 import './App.scss';
 
 export const AppContext = React.createContext({});
