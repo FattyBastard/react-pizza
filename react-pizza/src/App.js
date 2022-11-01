@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
+import axios from 'axios';
 import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
 import { Cart } from './pages/Cart';
@@ -50,19 +50,22 @@ function App() {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
-        activeCategory > 0 ? `category=${activeCategory}` : ``
-      }&sortBy=${sortType[sort].sortProperty.replace('-', '')}&order=${
-        sortType[sort].sortProperty.includes('-') ? `desc` : `asc`
-      }`,
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setCards(arr);
+    axios
+      .get(
+        `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
+          activeCategory > 0 ? `category=${activeCategory}` : ``
+        }&sortBy=${sortType[sort].sortProperty.replace('-', '')}&order=${
+          sortType[sort].sortProperty.includes('-') ? `desc` : `asc`
+        }`,
+      )
+      .then((response) => response.data)
+      .then((data) => {
+        setCards(data);
         setIsLoading(false);
       });
   }, [activeCategory, sort, inputValue]);
+
+  console.log('+');
 
   return (
     <div className="App">

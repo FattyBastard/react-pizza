@@ -7,6 +7,8 @@ export function Header() {
   const { selectedCards, totalPrice, inputOnChange, inputValue, setInputValue } =
     React.useContext(AppContext);
 
+  const useRef = React.useRef();
+
   return (
     <header className="header">
       <Link to="/">
@@ -21,6 +23,7 @@ export function Header() {
       <div className="search-field">
         <img src="img/search.svg" alt="search" height={12} width={12} className="search" />
         <input
+          ref={useRef}
           onChange={(event) => inputOnChange(event)}
           value={inputValue}
           className="search-input"
@@ -30,6 +33,7 @@ export function Header() {
         <img
           onClick={() => {
             setInputValue('');
+            useRef.current.focus();
           }}
           src="img/close-search.svg"
           alt="close"
