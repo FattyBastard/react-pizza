@@ -1,5 +1,9 @@
 import React from 'react';
 
+import ReactPaginate from 'react-paginate';
+
+import { useDispatch } from 'react-redux';
+import { setCurrentPage } from '../../redux/slices/sortSlice';
 import { AppContext } from '../../App';
 import { Categories } from '../categories/Categories';
 import { Sort } from '../sort/Sort';
@@ -8,7 +12,7 @@ import Card from '../card/Card';
 
 export function Home(props) {
   const { cards, isLoading, inputValue } = React.useContext(AppContext);
-
+  const dispatch = useDispatch();
   return (
     <div className="container">
       <div className="upper-part">
@@ -26,6 +30,21 @@ export function Home(props) {
               .map((object) => {
                 return <Card key={object.id} {...object} />;
               })}
+      </div>
+      <div className="paginator-container">
+        <ReactPaginate
+          className="paginator"
+          pageClassName="paginator-item"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={(event) => {
+            dispatch(setCurrentPage(event.selected + 1));
+          }}
+          pageRangeDisplayed={5}
+          pageCount={4}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+        />
       </div>
     </div>
   );

@@ -1,18 +1,20 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import axios from 'axios';
+
 import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
 import { Cart } from './pages/Cart';
 
 import { useSelector } from 'react-redux';
 
+import { Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+
 import './App.scss';
 
 export const AppContext = React.createContext({});
 
 function App() {
-  const { activeCategory, sort } = useSelector((state) => {
+  const { activeCategory, sort, currentPage } = useSelector((state) => {
     return state.filter;
   });
 
@@ -52,7 +54,7 @@ function App() {
     setIsLoading(true);
     axios
       .get(
-        `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?${
+        `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?page=${currentPage}&limit=4&${
           activeCategory > 0 ? `category=${activeCategory}` : ``
         }&sortBy=${sortType[sort].sortProperty.replace('-', '')}&order=${
           sortType[sort].sortProperty.includes('-') ? `desc` : `asc`
@@ -63,9 +65,8 @@ function App() {
         setCards(data);
         setIsLoading(false);
       });
-  }, [activeCategory, sort, inputValue]);
-
-  console.log('+');
+  }, [activeCategory, sort, inputValue, currentPage]);
+  console.log(currentPage);
 
   return (
     <div className="App">

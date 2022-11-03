@@ -155,7 +155,7 @@
 .all-pizza-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   gap: 20px 10px;
 
   @media (max-width: 1350px) {
@@ -430,5 +430,25 @@
   border: none;
   &:focus {
     outline: none;
+  }
+}
+.paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-item {
+    border: 1px solid #eb5a1e;
+    border-radius: 50px;
+    padding: 5px 10px;
+  }
+
+  li:not(:last-child) {
+    margin-right: 10px;
   }
 }
