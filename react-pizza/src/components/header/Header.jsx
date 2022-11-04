@@ -2,12 +2,28 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
+import debounce from 'lodash.debounce';
+import { useCallback } from 'react';
 
 export function Header() {
   const { selectedCards, totalPrice, inputOnChange, inputValue, setInputValue } =
     React.useContext(AppContext);
 
   const useRef = React.useRef();
+  const [input, setInput] = React.useState('');
+
+  const updateInputValue = React.useCallback(
+    debounce((event) => {
+      console.log(event.target.value);
+      inputOnChange(event);
+    }, 300),
+    [],
+  );
+
+  const onInputOnChange = (event) => {
+    setInput(event.target.value);
+    updateInputValue(event);
+  };
 
   return (
     <header className="header">
@@ -24,8 +40,8 @@ export function Header() {
         <img src="img/search.svg" alt="search" height={12} width={12} className="search" />
         <input
           ref={useRef}
-          onChange={(event) => inputOnChange(event)}
-          value={inputValue}
+          onChange={(event) => onInputOnChange(event)}
+          value={input}
           className="search-input"
           type="text"
           placeholder="Поиск..."

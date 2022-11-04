@@ -442,10 +442,21 @@
   align-items: center;
   justify-content: space-between;
 
+  .selected {
+    background-color: #eb5a1e;
+    color: white;
+  }
+
   &-item {
     border: 1px solid #eb5a1e;
     border-radius: 50px;
     padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eb5a1e;
+      color: white;
+    }
   }
 
   li:not(:last-child) {
