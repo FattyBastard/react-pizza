@@ -66,7 +66,6 @@ function App() {
         setIsLoading(false);
       });
   }, [activeCategory, sort, inputValue, currentPage]);
-  console.log(currentPage);
 
   return (
     <div className="App">

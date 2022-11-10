@@ -1,6 +1,7 @@
 import React from 'react';
 import { CartItem } from '../components/cart-item/CartItem';
 import { AppContext } from '../App';
+import { setSelectedPizzas, removeSelectedPizzas } from '../redux/slices/cartSlice';
 
 export function Cart(props) {
   const { selectedCards } = React.useContext(AppContext);

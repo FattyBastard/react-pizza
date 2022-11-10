@@ -1,7 +1,10 @@
 import React from 'react';
 import { AppContext } from '../../App';
+import { setSelectedPizzas, removeSelectedPizzas } from '../../redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 export function CartItem({ title, price, id, types, rating, sizes, category, imageUrl }) {
+  const dispatch = useDispatch();
   const { countEachProduct } = React.useContext(AppContext);
   const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
   return (
@@ -17,7 +20,15 @@ export function CartItem({ title, price, id, types, rating, sizes, category, ima
         <img src="img/plus.svg" alt="plus" height={32} width={32} />
       </div>
       <span>770 ₽ </span>
-      <img src="img/close.svg" alt="close" height={32} width={32} />
+      <img
+        onClick={() => {
+          dispatch(removeSelectedPizzas(id));
+        }}
+        src="img/close.svg"
+        alt="close"
+        height={32}
+        width={32}
+      />
     </li>
   );
 }

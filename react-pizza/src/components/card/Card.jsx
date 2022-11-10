@@ -1,5 +1,7 @@
 import React from 'react';
 import { AppContext } from '../../App';
+import { setSelectedPizzas, removeSelectedPizzas } from '../../redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const pizzaTypes = ['Тонкое', 'Толстое'];
@@ -9,8 +11,22 @@ function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
 
+  const dispatch = useDispatch();
   const clickOnPlus = (object) => {
     addToCart(object);
+    dispatch(
+      setSelectedPizzas({
+        id,
+        rating,
+        category,
+        imageUrl,
+        title,
+        price,
+        sizes,
+        types,
+      }),
+    );
+
     setCountPurchase((prev) => prev + 1);
   };
 
