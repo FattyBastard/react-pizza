@@ -48,7 +48,20 @@ function App() {
 
   // const addToCart = (object) => {
   //   setSelectedCards((prev) => [...prev, object]);
-  // };
+  // };'
+  React.useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(
+        `https://635bc6d8aa7c3f113dc5eb70.mockapi.io/pizza?page=${currentPage}&limit=4
+        `,
+      )
+      .then((response) => response.data)
+      .then((data) => {
+        setCards(data);
+        setIsLoading(false);
+      });
+  }, []);
 
   React.useEffect(() => {
     setIsLoading(true);
