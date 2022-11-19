@@ -5,15 +5,16 @@ import { useDispatch } from 'react-redux';
 
 function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
   const pizzaTypes = ['Тонкое', 'Толстое'];
+  const pizzaSizes = [26, 30, 40];
 
-  const { addToCart, countEachProduct } = React.useContext(AppContext);
+  // const { addToCart, countEachProduct } = React.useContext(AppContext);
   const [selectedType, setSelectedType] = React.useState(0);
   const [selectedSize, setSelectedSize] = React.useState(0);
-  const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
+  // const [countPurchase, setCountPurchase] = React.useState(() => countEachProduct(id));
 
   const dispatch = useDispatch();
   const clickOnPlus = (object) => {
-    addToCart(object);
+    // addToCart(object);
     dispatch(
       setSelectedPizzas({
         id,
@@ -22,14 +23,15 @@ function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
         imageUrl,
         title,
         price,
-        sizes,
-        types,
+        sizes: pizzaSizes[selectedSize],
+        types: pizzaTypes[selectedType],
       }),
     );
 
-    setCountPurchase((prev) => prev + 1);
+    // setCountPurchase((prev) => prev + 1);
   };
 
+  console.log(pizzaSizes[selectedSize]);
   const object = { id, rating, category, imageUrl, title, price, sizes, types };
 
   return (
@@ -76,7 +78,7 @@ function Card({ imageUrl, title, price, sizes, types, id, rating, category }) {
           className="add-button">
           <img src="img/button-plus.svg" alt="plus" height={12} width={12} />
           <button>Добавить</button>
-          <span>{countPurchase}</span>
+          <span>{0}</span>
         </div>
       </div>
     </div>

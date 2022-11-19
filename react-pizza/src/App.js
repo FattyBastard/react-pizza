@@ -14,8 +14,8 @@ import './App.scss';
 export const AppContext = React.createContext({});
 
 function App() {
-  const { activeCategory, sort, currentPage } = useSelector((state) => {
-    return state.filter;
+  const { activeCategory, sort, currentPage } = useSelector((store) => {
+    return store.filter;
   });
 
   const sortType = [
@@ -28,7 +28,7 @@ function App() {
   ];
 
   const [cards, setCards] = React.useState([]);
-  const [selectedCards, setSelectedCards] = React.useState([]);
+  // const [selectedCards, setSelectedCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [inputValue, setInputValue] = React.useState('');
 
@@ -36,19 +36,19 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  const totalPrice = selectedCards.reduce((accumulator, currentValue) => {
-    return (accumulator += parseInt(currentValue.price));
-  }, 0);
+  // const totalPrice = selectedCards.reduce((accumulator, currentValue) => {
+  //   return (accumulator += parseInt(currentValue.price));
+  // }, 0);
 
-  const countEachProduct = (id) => {
-    return selectedCards.filter((object) => {
-      return parseInt(object.id) === parseInt(id);
-    }).length;
-  };
+  // const countEachProduct = (id) => {
+  //   return selectedCards.filter((object) => {
+  //     return parseInt(object.id) === parseInt(id);
+  //   }).length;
+  // };
 
-  const addToCart = (object) => {
-    setSelectedCards((prev) => [...prev, object]);
-  };
+  // const addToCart = (object) => {
+  //   setSelectedCards((prev) => [...prev, object]);
+  // };
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -76,11 +76,11 @@ function App() {
             setCards,
             isLoading,
             setIsLoading,
-            selectedCards,
-            setSelectedCards,
-            addToCart,
-            totalPrice,
-            countEachProduct,
+            // selectedCards,
+            // setSelectedCards,
+            // addToCart,
+            // totalPrice,
+            // countEachProduct,
 
             inputValue,
             inputOnChange,

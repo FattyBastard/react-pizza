@@ -5,9 +5,10 @@ import { AppContext } from '../../App';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
 
+import { setSelectedPizzas, removeSelectedPizzas } from '../../redux/slices/cartSlice';
+
 export function Header() {
-  const { selectedCards, totalPrice, inputOnChange, inputValue, setInputValue } =
-    React.useContext(AppContext);
+  const { inputOnChange, inputValue, setInputValue } = React.useContext(AppContext);
 
   const useRef = React.useRef();
   const [input, setInput] = React.useState('');
@@ -60,10 +61,10 @@ export function Header() {
       </div>
       <Link to="/cart">
         <div className="header-button">
-          <span>{totalPrice} ₽</span>
+          <span>{5000} ₽</span>
           <img src="img/slash.svg" alt="slash" className="slash" height={25} width={1} />
           <img src="img/cart.svg" alt="cart" className="cart" height={16} width={16} />
-          <span className="items-count">{selectedCards.length}</span>
+          <span className="items-count">{5}</span>
         </div>
       </Link>
     </header>

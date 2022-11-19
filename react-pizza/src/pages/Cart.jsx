@@ -2,9 +2,15 @@ import React from 'react';
 import { CartItem } from '../components/cart-item/CartItem';
 import { AppContext } from '../App';
 import { setSelectedPizzas, removeSelectedPizzas } from '../redux/slices/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export function Cart(props) {
-  const { selectedCards } = React.useContext(AppContext);
+  // const { selectedCards } = React.useContext(AppContext);
+
+  const { selectedPizzas } = useSelector((store) => {
+    return store.cart;
+  });
+
   return (
     <>
       <div className="cart-container">
@@ -19,8 +25,8 @@ export function Cart(props) {
           </div>
         </div>
         <ul className="cart-list">
-          {selectedCards.map((object) => {
-            return <CartItem key={object.id} {...object} />;
+          {selectedPizzas.map((object, index) => {
+            return <CartItem key={index} {...object} />;
           })}
         </ul>
       </div>

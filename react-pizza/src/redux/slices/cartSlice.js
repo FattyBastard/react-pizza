@@ -12,7 +12,16 @@ export const cartSlice = createSlice({
       state.selectedPizzas.push(action.payload);
     },
     removeSelectedPizzas(state, action) {
-      state.selectedPizzas = state.selectedPizzas.filter((pizza) => pizza.id != action.payload);
+      state.selectedPizzas = state.selectedPizzas.filter((pizza) => {
+        console.log(action.payload.id, action.payload.types, action.payload.sizes);
+        if (
+          pizza.id !== action.payload.id &&
+          pizza.types !== action.payload.types &&
+          pizza.sizes !== action.payload.sizes
+        ) {
+          return pizza;
+        }
+      });
     },
   },
 });
